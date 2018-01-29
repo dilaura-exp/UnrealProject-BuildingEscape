@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "Engine/TriggerVolume.h"
+#include "Engine/World.h"
 #include "DoorOpener.generated.h"
 
 
@@ -24,6 +26,21 @@ public:
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-		
-	
+private:
+
+	UPROPERTY(VisibleAnywhere)
+	float OpenRotation = 60.0f;
+
+	UPROPERTY(VisibleAnywhere)
+	float DoorCloseDelay = 0.6f;
+
+	UPROPERTY(EditAnywhere)
+	ATriggerVolume* Triggerer;
+
+	UPROPERTY(VisibleAnywhere)
+	AActor* OpenerActor;
+	float LastDoorOpenTime = 0.0f;
+
+	void OpenDoor();
+	void CloseDoor();
 };
